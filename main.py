@@ -11,7 +11,7 @@ res = requests.get(URL_ENDPOINT+"/recipes") # pulls all data from this website
 #     file.write(res.text)
 
 # fed all the res.text into the soup variable
-soup = BeautifulSoup(res.text)
+soup = BeautifulSoup(res.text, "lxml")
 
 recipes = {}
 
@@ -19,7 +19,7 @@ recipes = {}
 anchor_list = soup.find_all("a", attrs={"class": "inline-block mt-4 px-4 py-2 bg-[#d32f2f] text-white rounded-lg hover:bg-[#b71c1c] transition-colors duration-300"})
 for anchor in anchor_list:
     res = requests.get(URL_ENDPOINT+anchor["href"])
-    soup = BeautifulSoup(res.text)
+    soup = BeautifulSoup(res.text, "lxml")
 
     recipe_title = soup.h1.text # grabs the name of each recipe
     
