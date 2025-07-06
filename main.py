@@ -16,5 +16,8 @@ soup = BeautifulSoup(res.text)
 # anchor tag that matches this particular class
 anchor_list = soup.find_all("a", attrs={"class": "inline-block mt-4 px-4 py-2 bg-[#d32f2f] text-white rounded-lg hover:bg-[#b71c1c] transition-colors duration-300"})
 for anchor in anchor_list:
-    print(anchor["href"])
+    res = requests.get(URL_ENDPOINT+anchor["href"])
+    soup = BeautifulSoup(res.text)
+
+    print(soup.h1)
 
